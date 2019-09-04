@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template 
 app = Flask(__name__)
 file_path = "./sensor_data.csv" 
-my_port = 17123
+my_port = 19237
 
 @app.route('/',methods=['GET']) 
 def get_html(): 
@@ -10,7 +10,7 @@ def get_html():
 @app.route('/lux', methods=['POST']) 
 def update_lux():
     time = request.form["time"] 
-    lux = request.form["/lux"] 
+    lux = request.form["lux"] 
     try:
         f = open(file_path, 'w') 
         f.write(time + "," + lux) 
