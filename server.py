@@ -1,23 +1,31 @@
-from flask import Flask, request, render_template app = Flask(__name__)
-file_path = "./sensor_data.csv" my_port = 17123
+from flask import Flask, request, render_template 
+app = Flask(__name__)
+file_path = "./sensor_data.csv" 
+my_port = 17123
 
-@app.route('/',methods=['GET']) def
-get_html(): 
+@app.route('/',methods=['GET']) 
+def get_html(): 
     return render_template('./index.html')
 
-@app.route('/lux', methods=['POST']) def
-update_lux():
-    time = request.form["time"] lux = request.form["/lux"] try:
-        f = open(file_path, 'w') f.write(time + "," + lux) return "succeded to write"
+@app.route('/lux', methods=['POST']) 
+def update_lux():
+    time = request.form["time"] 
+    lux = request.form["/lux"] 
+    try:
+        f = open(file_path, 'w') 
+        f.write(time + "," + lux) 
+        return "succeded to write"
     except Exception as e:
         print(e)
-        return "failed to write" finally:
+        return "failed to write"
+    finally:
         f.close()
 
-@app.route('/lux', methods=['GET']) def
-get_lux:
+@app.route('/lux', methods=['GET']) 
+def get_lux():
     try:
-        f = open(file_path, 'r') for row in f:
+        f = open(file_path, 'r') 
+        for row in f:
             lux = row
         return lux
     except Exception as e:
